@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>My Video</title>
+  <meta name="description" content="Watch this video." />
+
+  <!-- Open Graph — replace thumb.jpeg URL with absolute Netlify URL after first deploy -->
+  <meta property="og:type"         content="website" />
+  <meta property="og:title"        content="My Video" />
+  <meta property="og:description"  content="Watch this video." />
+  <meta property="og:image"        content="./thumb.jpeg" />
+  <meta property="og:url"          content="https://YOUR-SITE.netlify.app" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="My Video" />
+  <meta name="twitter:description" content="Watch this video." />
+  <meta name="twitter:image"       content="./thumb.jpeg" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Full-screen video — hidden until tap -->
+  <video id="main-video" playsinline controls preload="auto"></video>
+
+  <!-- Full-screen tap layer — covers everything, captures first user gesture -->
+  <div id="tap-layer" aria-label="Tap to open" role="button" tabindex="0">
+    <div class="tap-hint">
+      <div class="play-ring">
+        <svg viewBox="0 0 60 60" aria-hidden="true">
+          <polygon points="22,14 48,30 22,46" fill="white"/>
+        </svg>
+      </div>
+      <p class="tap-label">Tap to open</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

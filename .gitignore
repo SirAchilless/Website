@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.npm/
+
+# Environment files — NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+*.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Netlify CLI
+.netlify/
+
+# Build output (not used, but just in case)
+dist/
+build/

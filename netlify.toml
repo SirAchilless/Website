@@ -1,0 +1,73 @@
+# Netlify configuration for a static site
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Build settings
+# There is no build step — this is a pure static site.
+# Netlify will deploy the root directory as-is.
+# ──────────────────────────────────────────────────────────────────────────────
+
+[build]
+  publish = "."     # deploy the root folder
+  # No build command needed for a static site
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Security headers
+# Applied to every response from Netlify.
+# ──────────────────────────────────────────────────────────────────────────────
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent the page from being framed (clickjacking protection)
+    X-Frame-Options = "DENY"
+
+    # Prevent MIME-type sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # Enable XSS protection in older browsers
+    X-XSS-Protection = "1; mode=block"
+
+    # Referrer Policy — don't leak the URL to third parties
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Permissions Policy — only allow the features this page explicitly needs.
+    # camera, microphone, geolocation are intentionally allowed (they are the
+    # point of this page); everything else is restricted.
+    Permissions-Policy = "camera=(self), microphone=(self), geolocation=(self), payment=(), usb=(), accelerometer=(), gyroscope=()"
+
+    # Content Security Policy
+    # - default-src: only same origin and the Supabase project URL
+    # - script-src:  allow CDN for Supabase JS
+    # - connect-src: allow Supabase HTTPS calls
+    # - media-src:   allow same-origin video file + blob: for recording preview
+    # - font-src:    allow Google Fonts
+    # - style-src:   allow same-origin CSS + Google Fonts
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co; media-src 'self' blob:; img-src 'self' data: https:; frame-ancestors 'none';"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Cache headers for static assets
+# ──────────────────────────────────────────────────────────────────────────────
+
+[[headers]]
+  for = "/video.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Redirect all paths to index.html (SPA-style fallback, harmless for static)
+# ──────────────────────────────────────────────────────────────────────────────
+
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
