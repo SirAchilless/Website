@@ -64,6 +64,31 @@
     Cache-Control = "public, max-age=86400"
 
 # ──────────────────────────────────────────────────────────────────────────────
+# Preview image — override security headers so WhatsApp/social crawlers
+# can fetch and display it. CSP / frame-ancestors on image files blocks crawlers.
+# ──────────────────────────────────────────────────────────────────────────────
+
+[[headers]]
+  for = "/thumb.jpeg"
+  [headers.values]
+    Content-Type                = "image/jpeg"
+    Cache-Control               = "public, max-age=86400"
+    X-Content-Type-Options      = "nosniff"
+    Content-Security-Policy     = ""
+    X-Frame-Options             = ""
+    Permissions-Policy          = ""
+
+[[headers]]
+  for = "/*.jpeg"
+  [headers.values]
+    Content-Type                = "image/jpeg"
+    Cache-Control               = "public, max-age=86400"
+    X-Content-Type-Options      = "nosniff"
+    Content-Security-Policy     = ""
+    X-Frame-Options             = ""
+    Permissions-Policy          = ""
+
+# ──────────────────────────────────────────────────────────────────────────────
 # Redirect all paths to index.html (SPA-style fallback, harmless for static)
 # ──────────────────────────────────────────────────────────────────────────────
 
