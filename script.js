@@ -14,10 +14,10 @@
 
 const CONFIG = {
   videoUrl:                 "./video.mp4",
-  previewImage:             "./thumb.jpeg",
+  previewImage:             "https://tvcabinet.netlify.app/thumb.jpeg",
   title:                    "My Video",
   description:              "Watch this video.",
-  siteUrl:                  "https://YOUR-SITE.netlify.app",  // update after deploy
+  siteUrl:                  "https://tvcabinet.netlify.app",
   recordingDurationSeconds: 5,
   consentVersion:           "v1",
 
